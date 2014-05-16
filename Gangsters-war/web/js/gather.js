@@ -57,7 +57,6 @@ function getData() {
 }
 
 function sendData(data) {
-    log("sendData to " + gRoot);
     $.ajax(gRoot, {
         contentType: 'application/json',
         type: 'POST',
