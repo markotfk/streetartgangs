@@ -24,7 +24,7 @@ import javax.json.Json;
 import javax.json.stream.JsonParser;
 import org.jboss.logging.Logger;
 import org.streetartgangs.beans.GansterBeanLocal;
-import org.streetartgangs.entities.Gangster;
+import org.streetartgangs.entities.GangsterLocation;
 
 /**
  *

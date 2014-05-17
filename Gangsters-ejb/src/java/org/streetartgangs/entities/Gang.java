@@ -7,6 +7,7 @@
 package org.streetartgangs.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,24 +18,35 @@ import javax.persistence.Id;
  * @author Marko Karjalainen <markotfk@gmail.com>
  */
 @Entity
-public class Gangster implements Serializable {
+public class Gang implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
+    
+    private String color;
+    
+    private List<Gangster> gangsters;
 
-    private String email;
-
-    public String getEmail() {
-        return email;
+    public List<Gangster> getGangsters() {
+        return gangsters;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setGangsters(List<Gangster> gangsters) {
+        this.gangsters = gangsters;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
     
+
     public String getName() {
         return name;
     }
@@ -61,10 +73,10 @@ public class Gangster implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Gangster)) {
+        if (!(object instanceof Gang)) {
             return false;
         }
-        Gangster other = (Gangster) object;
+        Gang other = (Gang) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -73,7 +85,7 @@ public class Gangster implements Serializable {
 
     @Override
     public String toString() {
-        return "org.streetartgangs.entities.Gangster[ id=" + id + " ]";
+        return "org.streetartgangs.entities.Gang[ id=" + id + " ]";
     }
     
 }

@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.streetartgangs.entities.Gangster;
+import org.streetartgangs.entities.GangsterLocation;
 
 /**
  *
@@ -27,29 +27,20 @@ public class GansterBean implements GansterBeanLocal {
     protected static final Logger logger = Logger.getLogger(GansterBean.class.getName());
     
     @Override
-    public void add(Gangster ganster) {
+    public void add(GangsterLocation location) {
         try {
-            em.persist(ganster);
+            em.persist(location);
         } catch (Exception e) {
            logger.log(Level.SEVERE, "GansterBean add error:{0}", e.getMessage());
            throw e;
         }
         
     }
-
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
-
     @Override
-    public Gangster find(Long id) {
-        return em.find(Gangster.class, id);
-    }
-
-    @Override
-    public List<Gangster> findAll() {
+    public List<GangsterLocation> findAll() {
         javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Gangster.class));
-        List<Gangster> list = em.createQuery(cq).getResultList();
-        return list;
+        cq.select(cq.from(GangsterLocation.class));
+        List<GangsterLocation> all = em.createQuery(cq).getResultList();
+        return all;
     }
 }

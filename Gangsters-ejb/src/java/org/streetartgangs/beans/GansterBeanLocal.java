@@ -8,7 +8,7 @@ package org.streetartgangs.beans;
 
 import java.util.List;
 import javax.ejb.Local;
-import org.streetartgangs.entities.Gangster;
+import org.streetartgangs.entities.GangsterLocation;
 
 /**
  *
@@ -17,10 +17,6 @@ import org.streetartgangs.entities.Gangster;
 @Local
 public interface GansterBeanLocal {
     
-    public void add(Gangster ganster);
-    
-    public Gangster find(Long id);
-    
-    public List<Gangster> findAll();
-    
+    public void add(GangsterLocation location);
+    public List<GangsterLocation> findAll();
 }

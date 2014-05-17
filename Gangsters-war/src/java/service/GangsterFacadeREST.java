@@ -21,7 +21,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.streetartgangs.beans.GansterBeanLocal;
-import org.streetartgangs.entities.Gangster;
+import org.streetartgangs.entities.GangsterLocation;
 
 /**
  *
@@ -39,7 +39,7 @@ public class GangsterFacadeREST {
 
     @POST
     @Consumes({"application/xml", "application/json"})
-    public void create(Gangster entity) {
+    public void add(GangsterLocation entity) {
         gb.add(entity);
     }
     
