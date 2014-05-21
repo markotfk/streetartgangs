@@ -13,7 +13,7 @@ import javax.ws.rs.core.Application;
  *
  * @author Marko Karjalainen <markotfk@gmail.com>
  */
-@javax.ws.rs.ApplicationPath("gangs")
+@javax.ws.rs.ApplicationPath("streetartgangs")
 public class ApplicationConfig extends Application {
 
     @Override
@@ -30,7 +30,8 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(service.GangsterFacadeREST.class);
+        resources.add(service.UserLocationREST.class);
+        resources.add(service.UserREST.class);
     }
     
 }

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.streetartgangs.beans;
 
 import java.util.List;
@@ -12,22 +6,22 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.streetartgangs.entities.GangsterLocation;
+import org.streetartgangs.entities.UserLocation;
 
 /**
  *
  * @author Marko Karjalainen <markotfk@gmail.com>
  */
 @Stateless
-public class GansterBean implements GansterBeanLocal {
+public class UserLocationBean implements UserLocationBeanLocal {
 
     @PersistenceContext(unitName = "Gangsters-ejbPU")
     protected EntityManager em;
     
-    protected static final Logger logger = Logger.getLogger(GansterBean.class.getName());
+    protected static final Logger logger = Logger.getLogger(UserLocationBean.class.getName());
     
     @Override
-    public void add(GangsterLocation location) {
+    public void add(UserLocation location) {
         try {
             em.persist(location);
         } catch (Exception e) {
@@ -37,10 +31,10 @@ public class GansterBean implements GansterBeanLocal {
         
     }
     @Override
-    public List<GangsterLocation> findAll() {
+    public List<UserLocation> findAll() {
         javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(GangsterLocation.class));
-        List<GangsterLocation> all = em.createQuery(cq).getResultList();
+        cq.select(cq.from(UserLocation.class));
+        List<UserLocation> all = em.createQuery(cq).getResultList();
         return all;
     }
 }

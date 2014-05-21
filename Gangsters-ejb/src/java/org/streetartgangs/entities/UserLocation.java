@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.streetartgangs.entities;
 
 import java.io.Serializable;
@@ -19,13 +13,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
-public class GangsterLocation implements Serializable {
+public class UserLocation implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long dbId;
 
-    private Integer gId;
+    private Integer id;
     
     private Integer userId;
 
@@ -45,12 +39,12 @@ public class GangsterLocation implements Serializable {
         this.gang = gang;
     }
     
-    public Integer getgId() {
-        return gId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setgId(Integer gId) {
-        this.gId = gId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getUserId() {
@@ -62,7 +56,7 @@ public class GangsterLocation implements Serializable {
     }
     
 
-    public GangsterLocation() 
+    public UserLocation() 
     {
         created = System.currentTimeMillis();
     }
@@ -91,29 +85,29 @@ public class GangsterLocation implements Serializable {
         this.latitude = latitude;
     }
 
-    public Long getId() {
-        return id;
+    public Long getDbId() {
+        return dbId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setDbId(Long dbId) {
+        this.dbId = dbId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (dbId != null ? dbId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GangsterLocation)) {
+        if (!(object instanceof UserLocation)) {
             return false;
         }
-        GangsterLocation other = (GangsterLocation) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        UserLocation other = (UserLocation) object;
+        if ((this.dbId == null && other.dbId != null) || (this.dbId != null && !this.dbId.equals(other.dbId))) {
             return false;
         }
         return true;
@@ -121,7 +115,7 @@ public class GangsterLocation implements Serializable {
 
     @Override
     public String toString() {
-        return "org.streetartgangs.entities.GangsterLocation[ id=" + id + " ]";
+        return "org.streetartgangs.entities.UserLocation[ id=" + dbId + " ]";
     }
     
 }

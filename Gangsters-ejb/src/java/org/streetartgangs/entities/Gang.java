@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.streetartgangs.entities;
 
 import java.io.Serializable;
@@ -12,30 +6,44 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Marko Karjalainen <markotfk@gmail.com>
  */
 @Entity
+@XmlRootElement
 public class Gang implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long dbId;
+
     private Long id;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     private String name;
     
     private String color;
     
-    private List<Gangster> gangsters;
+    @OneToMany
+    private List<User> users;
 
-    public List<Gangster> getGangsters() {
-        return gangsters;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setGangsters(List<Gangster> gangsters) {
-        this.gangsters = gangsters;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     public String getColor() {
@@ -55,18 +63,18 @@ public class Gang implements Serializable {
         this.name = name;
     }
     
-    public Long getId() {
-        return id;
+    public Long getDbId() {
+        return dbId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setDbId(Long dbId) {
+        this.dbId = dbId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (dbId != null ? dbId.hashCode() : 0);
         return hash;
     }
 
@@ -77,7 +85,7 @@ public class Gang implements Serializable {
             return false;
         }
         Gang other = (Gang) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.dbId == null && other.dbId != null) || (this.dbId != null && !this.dbId.equals(other.dbId))) {
             return false;
         }
         return true;
@@ -85,7 +93,7 @@ public class Gang implements Serializable {
 
     @Override
     public String toString() {
-        return "org.streetartgangs.entities.Gang[ id=" + id + " ]";
+        return "org.streetartgangs.entities.Gang[ id=" + dbId + " ]";
     }
     
 }

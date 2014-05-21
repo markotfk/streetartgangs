@@ -1,30 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package org.streetartgangs.beans;
 
-package org.streetartgangs;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
-import javax.ejb.Schedule;
 import javax.ejb.Stateless;
-import javax.json.Json;
-import javax.json.stream.JsonParser;
 import org.jboss.logging.Logger;
-import org.streetartgangs.beans.GansterBeanLocal;
-import org.streetartgangs.entities.GangsterLocation;
 
 /**
  *
@@ -32,16 +13,16 @@ import org.streetartgangs.entities.GangsterLocation;
  */
 @Stateless
 @LocalBean
-public class GansterDataGatherTimerBean {
+public class UserLocationGatherBean {
 
     @EJB 
-    GansterBeanLocal gb;
+    UserBeanLocal ub;
     
-    private final Logger logger = Logger.getLogger(GansterDataGatherTimerBean.class.getName());
+    private final Logger logger = Logger.getLogger(UserLocationGatherBean.class.getName());
     
     private URL urlBase;
 
-    public GansterDataGatherTimerBean() {
+    public UserLocationGatherBean() {
         try {
             this.urlBase = new URL("http://vm0063.virtues.fi/gangsters/");
         } catch (MalformedURLException ex) {
@@ -106,34 +87,6 @@ public class GansterDataGatherTimerBean {
         } catch (IOException e) {
             logger.log(Logger.Level.ERROR, "gatherData error: " + e.getMessage());
     }
-        
         */
-        
-        /*
-        //Load venues or redirect
-     jQuery(document).ready(function(){
-
-  var endpoint = "http://vm0063.virtues.fi/gangsters/";
-       $.ajax({
-         type: "GET",
-         url: endpoint,
-         dataType: 'json',
-         beforeSend: function (xhr) {
-         }
-       }).done(function( data ) {
-
-for (var i = data.length - 1; i >= 0; i--) { //from all the gangsters in the list
-
-var gangster = data[i].username; // I want these details on one line in text file or table every 1 or 2 min
-var latitude = data[i].latitude;
-var longitude = data[i].longitude;
-var gang = data[i].color;
-
-}
-}).fail(function( jqXHR, textStatus ) {
-       //TODO fix this
-         alert("Error: something went wrong while loading the profile: "+ textStatus);
-       });
-}*/
     
 }

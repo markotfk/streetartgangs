@@ -1,46 +1,59 @@
 //Author     : Marko Karjalainen <markotfk@gmail.com>
 
-var timerId = 0;
-var urlRoot = "http://vm0063.virtues.fi/gangsters/";
-var gRoot = "gangs/v1/gangsters";
+var locationsRoot = "streetartgangs/v1/userlocations";
 
-function log(data) {
-    if (data) {
-        console.log(data);
+$(document).ready(function() {
+    $("#startStopTimerButton").click(toggleTimer);
+    getUserData();
+    getData();
+    toggleTimer();
+});
+
+function toggleTimer() {
+    if (timerId === -1) {
+        startTimer();
+    } else {
+        stopTimer();
     }
 }
 
-$(document).ready(function() {
-
-    getData();
+function startTimer() {
     timerId = window.setInterval(function() { getData(); }, 60000);
-});
+    $("#startStopTimerButton").html("Stop updating locations");
+}
+
+function stopTimer() {
+    window.clearInterval(timerId);
+    timerId = -1;
+    $("#startStopTimerButton").html("Start updating locations");
+}
 
 function getData() {
-    $.ajax(urlRoot, {
+    $.ajax(urlRoot + 'gangsters/', {
         contentType: 'application/json',
         type: 'GET',
         success: function(data, status, jqXHR) {
             log('Success Get data');
             for (var i = data.length - 1; i >= 0; i--) { //from all the gangsters in the list
-                var gId = data[i].id;
+                var id = data[i].id;
                 var userId = data[i].user;
                 var latitude = data[i].latitude;
                 var longitude = data[i].longitude;
                 var gang = data[i].gang;
                 
-                var gangster = {
-                    "gId": gId,
+                var userlocation = {
+                    "id": id,
                     "userId": userId,
                     "latitude": latitude,
                     "longitude": longitude,
                     "gang" : gang
                 };
-                log("Add userId: " + gangster.userId);
-                sendData(gangster);
+                log("Add location data for userId: " + userlocation.userId);
+                sendData(userlocation);
             }
         },
         error: function(jqXHR, textStatus, errorString) {
+            stopTimer();
             log('error getData: ' + textStatus + ': ' + errorString);
             $('#gather_data').html('Error: ' + errorString);
         }
@@ -48,13 +61,14 @@ function getData() {
 }
 
 function sendData(data) {
-    $.ajax(gRoot, {
+    $.ajax(locationsRoot, {
         contentType: 'application/json',
         type: 'POST',
         success: function(data, status, jqXHR) {
         },
         error: function(jqXHR, textStatus, errorString) {
             log('error sendData: ' + textStatus + ': ' + errorString);
+            stopTimer();
         },
         data: JSON.stringify(data)
     });

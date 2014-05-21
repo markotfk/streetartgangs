@@ -3,14 +3,14 @@
   <persistence-unit name="Gangsters-ejbPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>jdbc/streetartgangs</jta-data-source>
-    <class>org.streetartgangs.entities.GangsterLocation</class>
-    <class>org.streetartgangs.entities.Gangster</class>
     <class>org.streetartgangs.entities.Gang</class>
+    <class>org.streetartgangs.entities.User</class>
+    <class>org.streetartgangs.entities.UserLocation</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <shared-cache-mode>ALL</shared-cache-mode>
     <properties>
       <property name="eclipselink.ddl-generation" value="create-tables"/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>
