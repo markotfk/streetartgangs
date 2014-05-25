@@ -3,7 +3,7 @@ package org.streetartgangs.beans;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.streetartgangs.entities.User;
+import org.streetartgangs.entities.StreetArtUser;
 
 /**
  *
@@ -16,7 +16,7 @@ public class UserBean implements UserBeanLocal {
     protected EntityManager em;
     
     @Override
-    public void addUser(User user) {
+    public void addUser(StreetArtUser user) {
         if (user == null) {
             throw new NullPointerException("user");
         }
@@ -26,10 +26,10 @@ public class UserBean implements UserBeanLocal {
     }
     
     @Override
-    public User find(Long id) {
+    public StreetArtUser find(Long id) {
         if (id == null) {
             return null;
         }
-        return em.find(User.class, id);
+        return em.find(StreetArtUser.class, id);
     }
 }

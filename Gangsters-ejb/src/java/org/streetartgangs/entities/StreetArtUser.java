@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
-public class User implements Serializable {
+public class StreetArtUser implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,7 +35,7 @@ public class User implements Serializable {
     
     private Long created;
 
-    public User() {
+    public StreetArtUser() {
         created = System.currentTimeMillis();
         name = "";
         email = "";
@@ -83,10 +83,10 @@ public class User implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
+        if (!(object instanceof StreetArtUser)) {
             return false;
         }
-        User other = (User) object;
+        StreetArtUser other = (StreetArtUser) object;
         if ((this.dbId == null && other.dbId != null) || (this.dbId != null && !this.dbId.equals(other.dbId))) {
             return false;
         }

@@ -36,13 +36,13 @@ public class Gang implements Serializable {
     private String color;
     
     @OneToMany
-    private List<User> users;
+    private List<StreetArtUser> users;
 
-    public List<User> getUsers() {
+    public List<StreetArtUser> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<StreetArtUser> users) {
         this.users = users;
     }
 

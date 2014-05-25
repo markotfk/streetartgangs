@@ -4,8 +4,8 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>jdbc/streetartgangs</jta-data-source>
     <class>org.streetartgangs.entities.Gang</class>
-    <class>org.streetartgangs.entities.User</class>
     <class>org.streetartgangs.entities.UserLocation</class>
+    <class>org.streetartgangs.entities.StreetArtUser</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <shared-cache-mode>ALL</shared-cache-mode>
     <properties>

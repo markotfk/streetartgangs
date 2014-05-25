@@ -9,7 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import org.streetartgangs.beans.UserBeanLocal;
-import org.streetartgangs.entities.User;
+import org.streetartgangs.entities.StreetArtUser;
 
 /**
  *
@@ -27,14 +27,14 @@ public class UserREST  {
 
     @POST
     @Consumes({"application/xml", "application/json"})
-    public void create(User entity) {
+    public void add(StreetArtUser entity) {
         ub.addUser(entity);
     }
 
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public User find(@PathParam("id") Long id) {
+    public StreetArtUser find(@PathParam("id") Long id) {
         return ub.find(id);
     }
     
