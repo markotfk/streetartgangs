@@ -1,6 +1,7 @@
 package org.streetartgangs.entities;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,7 @@ public class StreetArtUser implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long dbId;
 
+    @Column(unique=true)
     private Long id;
 
     public Long getId() {
@@ -29,7 +31,7 @@ public class StreetArtUser implements Serializable {
         this.id = id;
     }
     
-    private String name;
+    private String username;
 
     private String email;
     
@@ -37,8 +39,6 @@ public class StreetArtUser implements Serializable {
 
     public StreetArtUser() {
         created = System.currentTimeMillis();
-        name = "";
-        email = "";
     }
     
     public Long getCreated() {
@@ -57,12 +57,12 @@ public class StreetArtUser implements Serializable {
         this.email = email;
     }
     
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
     
     public Long getDbId() {

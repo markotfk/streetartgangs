@@ -2,6 +2,7 @@ package org.streetartgangs.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +22,7 @@ public class Gang implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long dbId;
 
+    @Column(unique=true)
     private Long id;
 
     public Long getId() {
