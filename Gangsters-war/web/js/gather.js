@@ -4,9 +4,9 @@ var locationsRoot = "streetartgangs/v1/userlocations";
 
 $(document).ready(function() {
     $("#startStopTimerButton").click(toggleTimer);
-    getUserData();
-    getData();
-    toggleTimer();
+    //getUserData();
+    //getData();
+    //toggleTimer();
 });
 
 function toggleTimer() {

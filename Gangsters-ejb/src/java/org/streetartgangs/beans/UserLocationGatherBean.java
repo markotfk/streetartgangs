@@ -1,11 +1,24 @@
 package org.streetartgangs.beans;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
+import javax.ejb.Schedule;
 import javax.ejb.Stateless;
-import org.jboss.logging.Logger;
+import javax.json.Json;
+import javax.json.stream.JsonParser;
+import org.streetartgangs.entities.StreetArtUser;
 
 /**
  *
@@ -24,24 +37,24 @@ public class UserLocationGatherBean {
 
     public UserLocationGatherBean() {
         try {
-            this.urlBase = new URL("http://vm0063.virtues.fi/gangsters/");
+            this.urlBase = new URL("http://vm0063.virtues.fi/gangsters/?format=json");
         } catch (MalformedURLException ex) {
-            logger.log(Logger.Level.ERROR, "GansterDataGatherTimerBean() error:" + ex.getMessage());
+            logger.log(Level.SEVERE, "GansterDataGatherTimerBean() error:{0}", ex.getMessage());
         }
     }
     
-    /*@Schedule(minute = "0-59", second = "0", dayOfMonth = "*", month = "*", year = "*", hour = "0-23", dayOfWeek = "*")
+    @Schedule(minute = "0-59", second = "0", dayOfMonth = "*", month = "*", year = "*", hour = "0-23", dayOfWeek = "*")
     public void gatherData() {
         try {
             HttpURLConnection urlConn = (HttpURLConnection)urlBase.openConnection();
             urlConn.setRequestMethod("GET");
+            urlConn.setRequestProperty("Content-type", "application/json");
             urlConn.setConnectTimeout(45000);
-            StringBuilder sb = new StringBuilder();
             InputStream in = new BufferedInputStream(urlConn.getInputStream());
             BufferedReader bRead = new BufferedReader(new InputStreamReader(in));
             JsonParser parser = Json.createParser(bRead);
-            List<Gangster> gangsters = null;
-            Gangster instance = null;
+            List<StreetArtUser> gangsters = null;
+            StreetArtUser instance = null;
             while (parser.hasNext()) 
             {
                 JsonParser.Event event = parser.next();
@@ -51,10 +64,10 @@ public class UserLocationGatherBean {
                         break;
                     case END_ARRAY:
                     case START_OBJECT:
-                        instance = new Gangster();
+                        instance = new StreetArtUser();
                         break;
                     case END_OBJECT:
-                        if (gangsters != null) 
+                        if (gangsters != null && instance != null) 
                         {
                             gangsters.add(instance);
                             instance = null;
@@ -78,15 +91,14 @@ public class UserLocationGatherBean {
             }
             if (gangsters != null) 
             {
-                for (Gangster g : gangsters) 
+                for (StreetArtUser g : gangsters) 
                 {
-                    gb.add(g);
+                    ub.addUser(g);
                 }
             }
             
         } catch (IOException e) {
-            logger.log(Logger.Level.ERROR, "gatherData error: " + e.getMessage());
+            logger.log(Level.SEVERE, "gatherData error: {0}", e.getMessage());
+        }
     }
-        */
-    
 }
