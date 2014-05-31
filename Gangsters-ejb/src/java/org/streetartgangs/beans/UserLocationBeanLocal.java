@@ -12,5 +12,6 @@ import org.streetartgangs.entities.UserLocation;
 public interface UserLocationBeanLocal {
     
     public void add(UserLocation location);
+    public void addMany(List<UserLocation> locations);
     public List<UserLocation> findAll();
 }

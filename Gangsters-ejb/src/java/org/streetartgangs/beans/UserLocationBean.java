@@ -25,7 +25,7 @@ public class UserLocationBean implements UserLocationBeanLocal {
         try {
             em.persist(location);
         } catch (Exception e) {
-           logger.log(Level.SEVERE, "GansterBean add error:{0}", e.getMessage());
+           logger.log(Level.SEVERE, "UserLocationBean add error:{0}", e.getMessage());
            throw e;
         }
         
@@ -36,5 +36,19 @@ public class UserLocationBean implements UserLocationBeanLocal {
         cq.select(cq.from(UserLocation.class));
         List<UserLocation> all = em.createQuery(cq).getResultList();
         return all;
+    }
+
+    @Override
+    public void addMany(List<UserLocation> locations) {
+        if (locations == null) {
+            return;
+        }
+        for (UserLocation l : locations) {
+            try {
+                em.persist(l);
+            } catch (Exception e) {
+                logger.log(Level.SEVERE, "UserLocationBean addMany error: {0}", e.getMessage());
+            }
+        }
     }
 }
