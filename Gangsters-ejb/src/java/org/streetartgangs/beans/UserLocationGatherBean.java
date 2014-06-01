@@ -148,7 +148,7 @@ public class UserLocationGatherBean {
             case "id":
                 state = id;
                 break;
-            case "userId":
+            case "user":
                 state = userId;
                 break;
             case "latitude":
