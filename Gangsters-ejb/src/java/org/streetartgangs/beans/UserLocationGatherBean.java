@@ -63,21 +63,25 @@ public class UserLocationGatherBean {
             InputStream in = new BufferedInputStream(urlConn.getInputStream());
             BufferedReader bRead = new BufferedReader(new InputStreamReader(in));
             JsonParser parser = Json.createParser(bRead);
-            List<UserLocation> gangsters = null;
+            List<UserLocation> gangsters = new ArrayList<>();
             UserLocation instance = null;
             while (parser.hasNext()) 
             {
                 JsonParser.Event event = parser.next();
                 switch(event) {
                     case START_ARRAY:
-                        gangsters = new ArrayList<>();
+                        logger.log(Level.INFO, "START_ARRAY");
                         break;
                     case END_ARRAY:
+                        logger.log(Level.INFO, "END_ARRAY");
+                        break;
                     case START_OBJECT:
+                        logger.log(Level.INFO, "START_OBJECT");
                         instance = new UserLocation();
                         break;
                     case END_OBJECT:
-                        if (gangsters != null && instance != null) 
+                        logger.log(Level.INFO, "END_OBJECT");
+                        if (instance != null) 
                         {
                             gangsters.add(instance);
                             instance = null;
@@ -86,16 +90,20 @@ public class UserLocationGatherBean {
                     case VALUE_FALSE:
                     case VALUE_NULL:
                     case VALUE_TRUE:
-                        handleValue(event.toString(), instance, gangsters);
+                        logger.log(Level.INFO, "VALUE_TRUE: " + event.toString());
+                        handleValue(event.toString(), instance);
                        break;
                     case KEY_NAME:
+                        logger.log(Level.INFO, "KEY_NAME: " + parser.getString());
                         handleKey(parser.getString());
                         break;
                     case VALUE_STRING:
-                        handleValue(parser.getString(), instance, gangsters);
+                        logger.log(Level.INFO, "VALUE_STRING: " + parser.getString());
+                        handleValue(parser.getString(), instance);
                         break;
                     case VALUE_NUMBER:
-                        handleValue(parser.getInt(), instance, gangsters);
+                        logger.log(Level.INFO, "VALUE_NUMBER: " + parser.getString());
+                        handleValue(parser.getString(), instance);
                         break;                       
                     default:
                         break;
@@ -109,13 +117,13 @@ public class UserLocationGatherBean {
         
     }
     
-    private void handleValue(Object val, UserLocation user, List<UserLocation> gangsters) {
+    private void handleValue(Object val, UserLocation user) {
         switch (state) {
             case id:
-                user.setId((Integer)val);
+                user.setId(Integer.parseInt((String)val));
                 break;
             case userId:
-                user.setUserId((Integer)val);
+                user.setUserId(Integer.parseInt((String)val));
                 break;
             case longitude:
                 user.setLongitude(Double.parseDouble((String)val));
@@ -124,13 +132,11 @@ public class UserLocationGatherBean {
                 user.setLatitude(Double.parseDouble((String)val));
                 break;
             case gang:
-                user.setGang((Integer)val);
+                user.setGang(Integer.parseInt((String)val));
                 break;
             default:
                 break;
         }
-        gangsters.add(user);
-    
     }
     
     
