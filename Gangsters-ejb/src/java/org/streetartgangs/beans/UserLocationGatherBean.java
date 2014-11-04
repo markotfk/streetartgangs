@@ -87,8 +87,6 @@ public class UserLocationGatherBean {
                             handleKey(parser.getString());
                             break;
                         case VALUE_STRING:
-                            handleValue(parser.getString(), instance);
-                            break;
                         case VALUE_NUMBER:
                             handleValue(parser.getString(), instance);
                             break;

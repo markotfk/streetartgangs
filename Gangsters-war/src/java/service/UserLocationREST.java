@@ -6,9 +6,11 @@
 
 package service;
 
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import org.streetartgangs.beans.UserLocationBeanLocal;
@@ -34,4 +36,8 @@ public class UserLocationREST {
         ub.add(entity);
     }
     
+    @GET
+    public List<UserLocation> getAll() {
+        return ub.findAll();
+    }
 }
